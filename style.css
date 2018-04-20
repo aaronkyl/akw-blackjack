@@ -1,0 +1,96 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+    font-family: "Josefin Sans";
+}
+
+h1 {
+    color: white;
+    font-weight: 600;
+    letter-spacing: .05em
+}
+
+button {
+    width: 7em;
+    height: 2em;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    margin-left: 1em;
+    letter-spacing: .1em;
+}
+
+button:hover {
+    background-color: white;
+    color: #1F783D;
+}
+
+#table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #1F783D;
+    border: 30px solid #704B12;
+    border-radius: 50px;
+    min-height: 500px;
+    width: 80%;
+    min-width: 400px;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+#game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-width: 400px;
+}
+
+.swirl {
+    background-image: url("swirl.svg");
+    width: 25%;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.vflip {
+    transform: scaleY(-1);
+}
+
+.hand {
+    background-color: #1A6333;
+    width: 80%;
+    min-width: 300px;
+    min-height: 100px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.label {
+    width: 80%;
+    min-width: 300px;
+    text-align: left;
+    color: white;
+    letter-spacing: .05em;
+}
+
+.card {
+    height: 90px;
+    margin: 5px;
+}

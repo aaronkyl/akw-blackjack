@@ -1,0 +1,41 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+    <head>
+        <title>BLACKJACK</title>
+        <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="blackjack.js"></script>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600" rel="stylesheet">
+    </head>
+    <body>
+        <div id="table">
+            <div class="swirl"></div>
+            <div id="game-area">
+                <h1>BLACKJACK</h1>
+                <div id="messages"></div>
+                <div class="label">
+                    <label>Dealer: </label>
+                </div>
+                <label id="dealer-points" class="points"></label>
+                <div id="dealer-hand" class="hand">
+                    <img class="card" src="3_of_clubs.png">
+                    <img class="card" src="3_of_clubs.png">
+                </div>
+                <div class="label">
+                    <label>Player: </label>
+                </div>
+                <label id="player-points" class="points"></label>
+                <div id="player-hand" class="hand">
+                    <img class="card" src="3_of_clubs.png">
+                    <img class="card" src="3_of_clubs.png">
+                </div>
+                <div class="buttons">
+                    <button id="deal-button">DEAL</button>
+                    <button id="hit-button">HIT</button>
+                    <button id="stand-button">STAND</button>
+                </div>
+            </div>
+            <div class="swirl vflip"></div>
+        </div>
+    </body>
+</html>
