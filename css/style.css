@@ -1,3 +1,7 @@
+/** {*/
+/*    border: 1px solid red;*/
+/*}*/
+
 html, body {
     height: 100%;
 }
@@ -48,6 +52,7 @@ button:focus {
 }
 
 .dithered:hover {
+    background-color: white;
     background-color: rgba(255,255,255,0.4);
     color: white;
 }
@@ -65,6 +70,7 @@ button:focus {
     min-height: 500px;
     width: 80%;
     min-width: 500px;
+    max-width: 960px;
     box-sizing: border-box;
     padding: 25px;
     box-shadow: -5px 5px 0px #5C3D0F;
@@ -98,7 +104,7 @@ button:focus {
 }
 
 .swirl {
-    background-image: url("../img/swirl.svg");
+    background-image: url("../img/revolver.svg");
     width: 25%;
     height: 400px;
     background-size: contain;
@@ -107,12 +113,12 @@ button:focus {
 }
 
 .vflip {
-    transform: scaleY(-1);
+    transform: scaleX(-1);
 }
 
 .hand {
     background-color: rgba(0, 0, 0, 0.15);
-    width: 80%;
+    width: 90%;
     min-width: 300px;
     min-height: 100px;
     margin-bottom: 30px;
@@ -123,7 +129,7 @@ button:focus {
 }
 
 .label {
-    width: 80%;
+    width: 90%;
     min-width: 300px;
     text-align: left;
     color: white;
