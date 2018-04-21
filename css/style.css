@@ -7,13 +7,16 @@ body {
     justify-content: center;
     align-items: center;
     background-color: darkgrey;
-    font-family: "Josefin Sans";
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
 }
 
 h1 {
     color: white;
-    font-weight: 600;
-    letter-spacing: .05em
+    font-weight: 300;
+    letter-spacing: .05em;
+    font-size: 2.75em;
+    font-family: "Vast Shadow", cursive;
 }
 
 button {
@@ -23,7 +26,7 @@ button {
     border-radius: 5px;
     background-color: transparent;
     color: white;
-    font-size: 1rem;
+    font-size: 1em;
     margin-left: 1em;
     letter-spacing: .1em;
 }
@@ -44,7 +47,7 @@ button:hover {
     border-radius: 50px;
     min-height: 500px;
     width: 80%;
-    min-width: 400px;
+    min-width: 500px;
     box-sizing: border-box;
     padding: 25px;
     box-shadow: -5px 5px 0px #5C3D0F;
@@ -64,6 +67,7 @@ button:hover {
 }
 
 #game-area {
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
