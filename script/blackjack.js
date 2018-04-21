@@ -14,6 +14,7 @@ function Deck() {
     this.cards = [];
     var that = this;
     
+// ******this is broken?
     // initialize deck with 52 cards
     this.suits.forEach(function(suit) {
         that.names.forEach(function(name, value) {
@@ -41,13 +42,11 @@ function Hand(id) {
     
     this.drawCard = function(deck) {
         // get card
-        let cardIndex = Math.floor(Math.random() * deck.cards.length);
-        let card = deck.cards.splice(cardIndex, 1)[0];
+        let card = deck.cards.splice(that.cards.length - 1, 1)[0];
         // add card to hand
         that.cards.push(card);
         // add card to displayed hand on table
         $(`#${that.id}-hand`).append(card.drawCardImage());
-        console.log(that.id, that.cards);
         return;
     };
     
@@ -64,7 +63,9 @@ function Hand(id) {
 $(document).ready(function() {
     // initialize game
     var deck = new Deck();
+    console.log(deck.cards);
     deck.shuffle();
+    console.log("shuffled", deck.cards);
     var dealer = new Hand("dealer");
     var player = new Hand("player");
     

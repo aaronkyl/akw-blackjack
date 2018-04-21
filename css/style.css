@@ -46,7 +46,8 @@ button:focus {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: #1F783D;
+    /*background-color: #1F783D;*/
+    background-color: #1A6333;
     border: 30px solid #704B12;
     border-radius: 50px;
     min-height: 500px;
@@ -94,7 +95,7 @@ button:focus {
 }
 
 .hand {
-    background-color: #1A6333;
+    background-color: rgba(0, 0, 0, 0.15);
     width: 80%;
     min-width: 300px;
     min-height: 100px;
