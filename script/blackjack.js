@@ -22,9 +22,9 @@ function Deck() {
     });
     
     this.shuffle = function() {
-        for (var i = 0; i < 1000; i++) {
-            let card1Index = Math.floor(Math.random() * 53);
-            let card2Index = Math.floor(Math.random() * 53);
+        for (var i = 0, l = that.cards.length; i < 1000; i++) {
+            let card1Index = Math.floor(Math.random() * (l + 1));
+            let card2Index = Math.floor(Math.random() * (l + 1));
             let temp = that.cards[card1Index];
 
             that.cards[card1Index] = that.cards[card2Index];
@@ -40,10 +40,22 @@ function Hand(id) {
     var that = this;
     
     this.drawCard = function(deck) {
+        // get card
         let cardIndex = Math.floor(Math.random() * deck.cards.length);
         let card = deck.cards.splice(cardIndex, 1)[0];
+        // add card to hand
         that.cards.push(card);
-        return card;
+        // add card to displayed hand on table
+        $(`#${that.id}-hand`).append(card.drawCardImage());
+        // update hand total with new card value
+        $(`#${that.id}-points`).text(that.calculatePoints());
+        return;
+    };
+    
+    this.calculatePoints = function() {
+        return that.cards.reduce(function(a, b) {
+            return a.value + b.value;
+        });
     };
 }
 
@@ -58,12 +70,12 @@ $(document).ready(function() {
     $('#deal-button').click(function() {
         $(".hand").empty();
         [player, dealer].forEach(function(e) {
+            // clear hand
             e.cards = [];
+            // deal two cards
             for(var i = 0; i < 2; i++) {
-                let card = e.drawCard(deck);
-                $(`#${e.id}-hand`).append(card.drawCardImage());
+                e.drawCard(deck);
             }
-            console.log(e.cards);
         });
     });
     
