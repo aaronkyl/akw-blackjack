@@ -38,6 +38,7 @@ function Hand(id) {
     this.id = id;
     this.cards = [];
     this.value = 0;
+    this.bust = false;
     var that = this;
     
     this.drawCard = function(deck) {
@@ -51,9 +52,12 @@ function Hand(id) {
     };
     
     this.checkBust = function() {
+        console.log("checkBust: ", that.value);
         if (that.value > 21) {
             $("#messages").text(`${that.id.toUpperCase()} BUSTS!`);
             $(`#${that.id}-points`).css("color", "#F00");
+            console.log("BUST")
+            that.bust = true;
         }
         return;
     };
@@ -72,37 +76,82 @@ function Hand(id) {
 $(document).ready(function() {
     // initialize game
     var deck = new Deck();
-    console.log(deck.cards);
     deck.shuffle();
-    console.log("shuffled", deck.cards);
     var dealer = new Hand("dealer");
     var player = new Hand("player");
+    var playersTurn = true;
+    $("#hit-button,#stand-button").each(function() {
+            $(this).css("background-color", "rgba(255,255,255,.1");
+            $(this).prop("disabled", true);
+    });
+        
+    var handWon = function() {
+        $("#hit-button,#stand-button").each(function() {
+            $(this).css("background-color", "rgba(255,255,255,.1");
+            $(this).prop("disabled", true);
+        });
+        $("#deal-button").each(function() {
+            $(this).css("background-color", "");
+            $(this).prop("disabled", false);
+        });
+    };
+    
+    var checkForWinner = function() {
+        let winner = false;
+        if ((playersTurn && player.bust) || dealer.value == 21 || (!playersTurn && !dealer.bust && dealer.value > player.value)) {
+            // console.log("(playersTurn && player.bust):",(playersTurn && player.bust));
+            // console.log("dealer.value == 21:", dealer.value == 21);
+            // console.log("(!playersTurn && dealer.value > player.value):", (!playersTurn && dealer.value > player.value));
+            winner = dealer;
+        } else if (dealer.bust || player.value == 21 || (!playersTurn && dealer.value > 17 && player.value > dealer.value)) {
+            winner = player;
+        } else {
+            return winner;
+        }
+        $('#messages').text(`${winner.id.toUpperCase()} WON!`);
+        handWon();
+        return;
+    };
     
     // clear hands and deal a hand of two cards each to player and dealer
     $('#deal-button').click(function() {
         $(".hand").empty();
         $(".points").css("color", "");
+        $("#messages").empty();
+        playersTurn = true;
+        $("#hit-button,#stand-button").each(function() {
+            $(this).css("background-color", "");
+            $(this).prop("disabled", false);
+        });
+        $("#deal-button").css("background-color", "rgba(255,255,255,.1");
+        $("#deal-button").prop("disabled", true);
+        
         [player, dealer].forEach(function(e) {
             // clear hand
             e.cards = [];
+            e.bust = false;
             // deal two cards
             for(var i = 0; i < 2; i++) {
                 e.drawCard(deck);
             }
             e.calculatePoints();
         });
+        checkForWinner();
     });
     
     // hit - deal one card to player
     $('#hit-button').click(function() {
         player.drawCard(deck);
         player.calculatePoints();
+        checkForWinner();
     });
     
     $('#stand-button').click(function() {
-        while(dealer.value < 17) {
+        playersTurn = false;
+        while(dealer.value < 17 || dealer.value <= player.value) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
+            checkForWinner();
         }
     });
 })
