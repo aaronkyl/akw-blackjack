@@ -130,6 +130,10 @@ button:focus {
     letter-spacing: .05em;
 }
 
+.points {
+    padding-left: 1em;
+}
+
 .card {
     height: 90px;
     margin: 5px;

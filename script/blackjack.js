@@ -144,10 +144,10 @@ $(document).ready(function() {
     
     $('#stand-button').click(function() {
         playersTurn = false;
-        while(dealer.value < 17 || dealer.value <= player.value) {
+        while(dealer.value < 17 && dealer.value <= player.value) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
-            checkForWinner();
         }
+        checkForWinner();
     });
 })
