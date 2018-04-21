@@ -114,8 +114,10 @@ $(document).ready(function() {
     
     // clear hands and deal a hand of two cards each to player and dealer
     $('#deal-button').click(function() {
+        // reset table for next hand
         $(".hand").empty();
         $(".points").css("color", "");
+        $(".points").empty();
         $("#messages").empty();
         playersTurn = true;
         $("#hit-button").undither();
@@ -144,9 +146,10 @@ $(document).ready(function() {
     
     $('#stand-button').click(function() {
         playersTurn = false;
-        while(dealer.value < 17 && dealer.value <= player.value) {
+        while((dealer.value < player.value) || dealer.value < 17) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
+            checkForWinner();
         }
         checkForWinner();
     });
