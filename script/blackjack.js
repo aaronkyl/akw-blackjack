@@ -47,15 +47,17 @@ function Hand(id) {
         that.cards.push(card);
         // add card to displayed hand on table
         $(`#${that.id}-hand`).append(card.drawCardImage());
-        // update hand total with new card value
-        $(`#${that.id}-points`).text(that.calculatePoints());
+        console.log(that.id, that.cards);
         return;
     };
     
     this.calculatePoints = function() {
-        return that.cards.reduce(function(a, b) {
-            return a.value + b.value;
-        });
+        let total = that.cards.reduce(function(sum, cur) {
+            return sum + cur.value;
+        }, 0);
+        // update hand total with new card value
+        $(`#${that.id}-points`).text(total);
+        return;
     };
 }
 
@@ -76,11 +78,13 @@ $(document).ready(function() {
             for(var i = 0; i < 2; i++) {
                 e.drawCard(deck);
             }
+            e.calculatePoints();
         });
     });
     
     // hit - deal one card to player
     $('#hit-button').click(function() {
         player.drawCard(deck);
+        player.calculatePoints();
     });
 })
