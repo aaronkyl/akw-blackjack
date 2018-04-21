@@ -14,18 +14,18 @@ function Deck() {
     this.cards = [];
     var that = this;
     
-// ******this is broken?
     // initialize deck with 52 cards
     this.suits.forEach(function(suit) {
         that.names.forEach(function(name, value) {
             that.cards.push(new Card(suit, name, value+1));
         });
     });
+    console.log(this.cards);
     
     this.shuffle = function() {
         for (var i = 0, l = that.cards.length; i < 1000; i++) {
-            let card1Index = Math.floor(Math.random() * (l + 1));
-            let card2Index = Math.floor(Math.random() * (l + 1));
+            let card1Index = Math.floor(Math.random() * l);
+            let card2Index = Math.floor(Math.random() * l);
             let temp = that.cards[card1Index];
             that.cards[card1Index] = that.cards[card2Index];
             that.cards[card2Index] = temp;
@@ -80,30 +80,29 @@ $(document).ready(function() {
     var dealer = new Hand("dealer");
     var player = new Hand("player");
     var playersTurn = true;
-    $("#hit-button,#stand-button").each(function() {
-            $(this).css("background-color", "rgba(255,255,255,.1");
-            $(this).prop("disabled", true);
-    });
-        
+    $("#hit-button").dither();
+    $("#stand-button").dither();
+    $("#deal-button").undither();
+    
     var handWon = function() {
-        $("#hit-button,#stand-button").each(function() {
-            $(this).css("background-color", "rgba(255,255,255,.1");
-            $(this).prop("disabled", true);
-        });
-        $("#deal-button").each(function() {
-            $(this).css("background-color", "");
-            $(this).prop("disabled", false);
-        });
+        $("#hit-button").dither();
+        $("#stand-button").dither();
+        $("#deal-button").undither();
+    };
+    
+    var dealerWon = function() {
+        return (playersTurn && player.bust) || dealer.value == 21 || (!playersTurn && !dealer.bust && dealer.value > player.value);
+    };
+    
+    var playerWon = function() {
+        return dealer.bust || player.value == 21 || (!playersTurn && dealer.value > 17 && player.value > dealer.value);
     };
     
     var checkForWinner = function() {
         let winner = false;
-        if ((playersTurn && player.bust) || dealer.value == 21 || (!playersTurn && !dealer.bust && dealer.value > player.value)) {
-            // console.log("(playersTurn && player.bust):",(playersTurn && player.bust));
-            // console.log("dealer.value == 21:", dealer.value == 21);
-            // console.log("(!playersTurn && dealer.value > player.value):", (!playersTurn && dealer.value > player.value));
+        if (dealerWon()) {
             winner = dealer;
-        } else if (dealer.bust || player.value == 21 || (!playersTurn && dealer.value > 17 && player.value > dealer.value)) {
+        } else if (playerWon()) {
             winner = player;
         } else {
             return winner;
@@ -119,12 +118,9 @@ $(document).ready(function() {
         $(".points").css("color", "");
         $("#messages").empty();
         playersTurn = true;
-        $("#hit-button,#stand-button").each(function() {
-            $(this).css("background-color", "");
-            $(this).prop("disabled", false);
-        });
-        $("#deal-button").css("background-color", "rgba(255,255,255,.1");
-        $("#deal-button").prop("disabled", true);
+        $("#hit-button").undither();
+        $("#stand-button").undither();
+        $("#deal-button").dither();
         
         [player, dealer].forEach(function(e) {
             // clear hand

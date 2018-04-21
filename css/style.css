@@ -41,6 +41,17 @@ button:focus {
     outline: 0;
 }
 
+.dithered {
+    background-color: white;
+    background-color: rgba(255,255,255,0.4);
+    color: white;
+}
+
+.dithered:hover {
+    background-color: rgba(255,255,255,0.4);
+    color: white;
+}
+
 #table {
     position: relative;
     display: flex;
