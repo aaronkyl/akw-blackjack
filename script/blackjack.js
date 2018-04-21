@@ -27,7 +27,6 @@ function Deck() {
             let card1Index = Math.floor(Math.random() * (l + 1));
             let card2Index = Math.floor(Math.random() * (l + 1));
             let temp = that.cards[card1Index];
-
             that.cards[card1Index] = that.cards[card2Index];
             that.cards[card2Index] = temp;
         }
@@ -50,12 +49,19 @@ function Hand(id) {
         return;
     };
     
+    this.checkBust = function(total) {
+        if (total > 21) {
+            $("#messages").text(`${that.id.toUpperCase()} BUSTS!`);
+        }
+    };
+    
     this.calculatePoints = function() {
         let total = that.cards.reduce(function(sum, cur) {
             return sum + cur.value;
         }, 0);
         // update hand total with new card value
         $(`#${that.id}-points`).text(total);
+        that.checkBust(total);
         return;
     };
 }
@@ -87,5 +93,6 @@ $(document).ready(function() {
     $('#hit-button').click(function() {
         player.drawCard(deck);
         player.calculatePoints();
+        player.checkBust();
     });
 })
