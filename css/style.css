@@ -9,6 +9,7 @@ body {
     background-color: darkgrey;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
+    color: white;
 }
 
 h1 {
@@ -69,6 +70,10 @@ button:focus {
     border-radius: 16px;
     border-top: 5px solid #5C3D0F;
     border-right: 5px solid #5C3D0F;
+}
+
+#messages {
+    
 }
 
 #game-area {

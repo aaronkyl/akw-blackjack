@@ -37,6 +37,7 @@ function Deck() {
 function Hand(id) {
     this.id = id;
     this.cards = [];
+    this.value = 0;
     var that = this;
     
     this.drawCard = function(deck) {
@@ -49,19 +50,21 @@ function Hand(id) {
         return;
     };
     
-    this.checkBust = function(total) {
-        if (total > 21) {
+    this.checkBust = function() {
+        if (that.value > 21) {
             $("#messages").text(`${that.id.toUpperCase()} BUSTS!`);
+            $(`#${that.id}-points`).css("color", "#F00");
         }
+        return;
     };
     
     this.calculatePoints = function() {
-        let total = that.cards.reduce(function(sum, cur) {
+        that.value = that.cards.reduce(function(sum, cur) {
             return sum + cur.value;
         }, 0);
-        // update hand total with new card value
-        $(`#${that.id}-points`).text(total);
-        that.checkBust(total);
+        // update displayed hand total with new total
+        $(`#${that.id}-points`).text(that.value);
+        that.checkBust();
         return;
     };
 }
@@ -78,6 +81,7 @@ $(document).ready(function() {
     // clear hands and deal a hand of two cards each to player and dealer
     $('#deal-button').click(function() {
         $(".hand").empty();
+        $(".points").css("color", "");
         [player, dealer].forEach(function(e) {
             // clear hand
             e.cards = [];
@@ -93,6 +97,12 @@ $(document).ready(function() {
     $('#hit-button').click(function() {
         player.drawCard(deck);
         player.calculatePoints();
-        player.checkBust();
+    });
+    
+    $('#stand-button').click(function() {
+        while(dealer.value < 17) {
+            dealer.drawCard(deck);
+            dealer.calculatePoints();
+        }
     });
 })
