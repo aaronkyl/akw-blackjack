@@ -88,7 +88,8 @@ $(document).ready(function() {
         $(`#${e.id}-wins`).text(`${e.wins}`);
     });
     
-    var handWon = function() {
+    var handWon = function(winner) {
+        winner.wins++;
         $("#hit-button").dither();
         $("#stand-button").dither();
         $("#deal-button").undither();
@@ -112,9 +113,8 @@ $(document).ready(function() {
             return winner;
         }
         $('#messages').text(`${winner.id.toUpperCase()} WON!`);
-        winner.wins++;
         $(`#${winner.id}-wins`).text(`${winner.wins}`);
-        handWon();
+        handWon(winner);
         return;
     };
     
