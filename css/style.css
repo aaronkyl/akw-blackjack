@@ -22,6 +22,7 @@ h1 {
     letter-spacing: .05em;
     font-size: 2.75em;
     font-family: "Vast Shadow", cursive;
+    margin-bottom: 10px;
 }
 
 button {
@@ -89,8 +90,10 @@ button:focus {
     border-right: 5px solid #5C3D0F;
 }
 
-#messages {
-    
+#wins-container {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
 }
 
 #game-area {
@@ -103,7 +106,7 @@ button:focus {
     min-width: 400px;
 }
 
-.swirl {
+.gun {
     background-image: url("../img/revolver.svg");
     width: 25%;
     height: 400px;
@@ -112,7 +115,7 @@ button:focus {
     background-position: center;
 }
 
-.vflip {
+.hflip {
     transform: scaleX(-1);
 }
 

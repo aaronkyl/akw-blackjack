@@ -38,6 +38,7 @@ function Hand(id) {
     this.id = id;
     this.cards = [];
     this.value = 0;
+    this.wins = 0;
     this.bust = false;
     var that = this;
     
@@ -83,6 +84,9 @@ $(document).ready(function() {
     $("#hit-button").dither();
     $("#stand-button").dither();
     $("#deal-button").undither();
+    [player, dealer].forEach(function(e) {
+        $(`#${e.id}-wins`).text(`${e.wins}`);
+    });
     
     var handWon = function() {
         $("#hit-button").dither();
@@ -108,6 +112,8 @@ $(document).ready(function() {
             return winner;
         }
         $('#messages').text(`${winner.id.toUpperCase()} WON!`);
+        winner.wins++;
+        $(`#${winner.id}-wins`).text(`${winner.wins}`);
         handWon();
         return;
     };
