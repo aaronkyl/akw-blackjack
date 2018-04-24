@@ -22,6 +22,7 @@ h1 {
     letter-spacing: .05em;
     font-size: 2.75em;
     font-family: "Vast Shadow", cursive;
+    margin-top: 0;
     margin-bottom: 10px;
 }
 
@@ -119,6 +120,11 @@ button:focus {
     transform: scaleX(-1);
 }
 
+#messages {
+    height: 11px;
+    margin: 2px;
+}
+
 .hand {
     background-color: rgba(0, 0, 0, 0.15);
     width: 90%;
@@ -147,3 +153,8 @@ button:focus {
     height: 90px;
     margin: 5px;
 }
+
+/*code to collapse hand into stacked cards*/
+/*.card:not(:first-child) {*/
+/*    margin-left: -50px;*/
+/*}*/

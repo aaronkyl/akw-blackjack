@@ -44,6 +44,10 @@ function Deck() {
         }
         return;
     };
+    
+    this.isEmpty = function() {
+        return !this.cards.length;
+    };
 }
 
 function Hand(id) {
@@ -55,6 +59,10 @@ function Hand(id) {
     var that = this;
     
     this.drawCard = function(deck) {
+        if (deck.isEmpty()) {
+            // modal about deck being empty, start new game?
+            console.log("deck empty");
+        }
         // get card
         let card = deck.cards.splice(that.cards.length - 1, 1)[0];
         // add card to hand
@@ -106,10 +114,6 @@ $(document).ready(function() {
     [player, dealer].forEach(function(e) {
         $(`#${e.id}-wins`).text(`${e.wins}`);
     });
-    
-    var enoughCards = function() {
-        return deck.length > 0;
-    };
     
     var handWon = function(winner) {
         winner.wins++;
