@@ -17,7 +17,19 @@ function Deck() {
     // initialize deck with 52 cards
     this.suits.forEach(function(suit) {
         that.names.forEach(function(name, value) {
-            that.cards.push(new Card(suit, name, value+1));
+            if (!isNaN(name)) {
+                that.cards.push(new Card(suit, name, value+1));
+            } else if (name == "ace") {
+                that.cards.push(new Card(suit, name, 11));
+                that.cards[that.cards.length-1].aceIsOne = function() {
+                    this.value = 1;
+                    console.log("ACE VALUE CHANGED TO 1");
+                    console.log(this.name, this.value);
+                    return;
+                };
+            } else {
+                that.cards.push(new Card(suit, name, 10));
+            }
         });
     });
     console.log(this.cards);
@@ -53,14 +65,21 @@ function Hand(id) {
     };
     
     this.checkBust = function() {
-        console.log("checkBust: ", that.value);
         if (that.value > 21) {
+            console.log("BUST");
+            let ace11InHand = that.cards.findIndex(c => c.name == "ace" && c.value == 11);
+            if (ace11InHand + 1) {
+                console.log("11-POINT ACE IN HAND");
+                that.cards[ace11InHand].aceIsOne();
+                that.calculatePoints();
+                return that.checkBust();
+            }
             $("#messages").text(`${that.id.toUpperCase()} BUSTS!`);
             $(`#${that.id}-points`).css("color", "#F00");
-            console.log("BUST")
             that.bust = true;
+            return true;
         }
-        return;
+        return false;
     };
     
     this.calculatePoints = function() {
@@ -88,6 +107,10 @@ $(document).ready(function() {
         $(`#${e.id}-wins`).text(`${e.wins}`);
     });
     
+    var enoughCards = function() {
+        return deck.length > 0;
+    };
+    
     var handWon = function(winner) {
         winner.wins++;
         $("#hit-button").dither();
@@ -100,7 +123,7 @@ $(document).ready(function() {
     };
     
     var playerWon = function() {
-        return dealer.bust || player.value == 21 || (!playersTurn && dealer.value > 17 && player.value > dealer.value);
+        return dealer.bust || player.value == 21 || (!playersTurn && dealer.value >= 17 && player.value > dealer.value);
     };
     
     var checkForWinner = function() {
@@ -109,13 +132,19 @@ $(document).ready(function() {
             winner = dealer;
         } else if (playerWon()) {
             winner = player;
+        } else if (!playersTurn && player.value == dealer.value) {
+            $('#messages').text("DRAW");
+            $("#hit-button").dither();
+            $("#stand-button").dither();
+            $("#deal-button").undither();
+            return true;
         } else {
             return winner;
         }
         $('#messages').text(`${winner.id.toUpperCase()} WON!`);
-        $(`#${winner.id}-wins`).text(`${winner.wins}`);
         handWon(winner);
-        return;
+        $(`#${winner.id}-wins`).text(`${winner.wins}`);
+        return true;
     };
     
     // clear hands and deal a hand of two cards each to player and dealer
@@ -152,10 +181,10 @@ $(document).ready(function() {
     
     $('#stand-button').click(function() {
         playersTurn = false;
-        while((dealer.value < player.value) || dealer.value < 17) {
+        while((dealer.value <= player.value) && dealer.value < 17) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
-            checkForWinner();
+            // if(checkForWinner()) return;
         }
         checkForWinner();
     });
