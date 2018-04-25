@@ -109,8 +109,15 @@ function Hand(id) {
     };
     
     this.calculatePoints = function() {
-        that.value = that.cards.reduce(function(sum, cur) {
-            return sum + cur.value;
+        let shownPoints = that.cards.map(function(card) {
+            if (card.faceup) {
+                return card.value;
+            } else {
+                return 0;
+            }
+        });
+        that.value = shownPoints.reduce(function(sum, cur) {
+            return sum + cur;
         }, 0);
         // update displayed hand total with new total
         $(`#${that.id}-points`).text(that.value);
