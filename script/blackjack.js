@@ -2,9 +2,15 @@ function Card(suit, name, value) {
     this.suit = suit;
     this.name = name;
     this.value = value;
+    this.faceup = true;
     
     this.drawCardImage = function() {
-        return `<img class="card" src="img/${this.name}_of_${this.suit}.png" alt="${this.name} of ${this.suit}">`;
+        if (this.faceup) {
+            return `<img class="card" src="img/${this.name}_of_${this.suit}.png" alt="${this.name} of ${this.suit}">`;
+        } else {
+            return '<img class="card" src="img/card_back.svg" alt="Unrevealed card">';
+        }
+        
     };
 }
 
@@ -58,13 +64,16 @@ function Hand(id) {
     this.bust = false;
     var that = this;
     
-    this.drawCard = function(deck) {
+    this.drawCard = function(deck, faceup = true) {
         if (deck.isEmpty()) {
             // modal about deck being empty, start new game?
             console.log("deck empty");
         }
         // get card
         let card = deck.cards.splice(that.cards.length - 1, 1)[0];
+        if (this.id == "dealer" && this.cards.length == 0) {
+            card.faceup = false;
+        }
         // add card to hand
         that.cards.push(card);
         // add card to displayed hand on table
@@ -148,7 +157,7 @@ $(document).ready(function() {
         $('#messages').text(`${winner.id.toUpperCase()} WON!`);
         handWon(winner);
         $(`#${winner.id}-wins`).text(`${winner.wins}`);
-        return true;
+        return;
     };
     
     // clear hands and deal a hand of two cards each to player and dealer
@@ -185,6 +194,8 @@ $(document).ready(function() {
     
     $('#stand-button').click(function() {
         playersTurn = false;
+        // put code to replace first card image with revealed card here
+        
         while((dealer.value <= player.value) && dealer.value < 17) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
