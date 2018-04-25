@@ -71,6 +71,7 @@ function Hand(id) {
         }
         // get card
         let card = deck.cards.splice(that.cards.length - 1, 1)[0];
+        console.log(card);
         if (this.id == "dealer" && this.cards.length == 0) {
             card.faceup = false;
         }
@@ -195,7 +196,8 @@ $(document).ready(function() {
     $('#stand-button').click(function() {
         playersTurn = false;
         // put code to replace first card image with revealed card here
-        
+        dealer.cards[0].faceup = true;
+        $('#dealer-hand img:first-child').replaceWith(dealer.cards[0].drawCardImage());
         while((dealer.value <= player.value) && dealer.value < 17) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
