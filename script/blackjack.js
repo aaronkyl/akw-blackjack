@@ -165,9 +165,16 @@ $(document).ready(function() {
             return winner;
         }
         $('#messages').text(`${winner.id.toUpperCase()} WON!`);
+        revealDealerCards();
         handWon(winner);
         $(`#${winner.id}-wins`).text(`${winner.wins}`);
         return;
+    };
+    
+    var revealDealerCards = function() {
+        dealer.cards[0].faceup = true;
+        $('#dealer-hand img:first-child').attr("src", dealer.cards[0].imageSRC());
+        dealer.calculatePoints();
     };
     
     // clear hands and deal a hand of two cards each to player and dealer
@@ -182,35 +189,40 @@ $(document).ready(function() {
         $("#stand-button").undither();
         $("#deal-button").dither();
         
-        [player, dealer].forEach(function(e) {
-            // clear hand
-            e.cards = [];
-            e.bust = false;
-            // deal two cards
-            for(var i = 0; i < 2; i++) {
-                e.drawCard(deck);
-            }
-            e.calculatePoints();
-        });
-        checkForWinner();
+        if (deck.cards.length >= 4) {
+            [player, dealer].forEach(function(e) {
+                // clear hand
+                e.cards = [];
+                e.bust = false;
+                // deal two cards
+                for(var i = 0; i < 2; i++) {
+                    e.drawCard(deck);
+                }
+                e.calculatePoints();
+            });
+            checkForWinner();
+        } else {
+            $('#messages').text("Deck does not have enough cards to deal");
+        }
     });
     
-    // hit - deal one card to player
     $('#hit-button').click(function() {
-        player.drawCard(deck);
-        player.calculatePoints();
-        checkForWinner();
+        if (deck.isEmpty()) {
+            $('#messages').text("Deck is out of cards");
+            return;
+        } else {
+            player.drawCard(deck);
+            player.calculatePoints();
+            checkForWinner();
+        }
     });
     
     $('#stand-button').click(function() {
         playersTurn = false;
-        // put code to replace first card image with revealed card here
-        dealer.cards[0].faceup = true;
-        $('#dealer-hand img:first-child').attr("src", dealer.cards[0].imageSRC());
-        while((dealer.value <= player.value) && dealer.value < 17) {
+        revealDealerCards();
+        while((dealer.value <= player.value) && dealer.value < 17 && !deck.isEmpty()) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
-            // if(checkForWinner()) return;
         }
         checkForWinner();
     });
