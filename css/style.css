@@ -123,6 +123,7 @@ button:focus {
 #settings-btn, #info-btn {
     display: flex;
     align-items: flex-end;
+    z-index: 1;
 }
 
 #settings-btn {
