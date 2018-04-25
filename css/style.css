@@ -34,7 +34,8 @@ button {
     background-color: transparent;
     color: white;
     font-size: 1em;
-    margin-left: 1em;
+    margin-left: .5em;
+    margin-right: .5em;
     letter-spacing: .1em;
 }
 
@@ -107,15 +108,43 @@ button:focus {
     min-width: 400px;
 }
 
+#settings-btn, #info-btn {
+    display: flex;
+    align-items: flex-end;
+}
+
 #settings-btn {
     position: absolute;
     top: .5em;
     right: .7em;
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     color: rgba(255, 255, 255, .1);
     font-size: 2em;
-    
+}
+
+#info-btn {
+    position: absolute;
+    top: .5em;
+    right: 1.5em;
+    height: 30px;
+    width: 30px;
+    color: rgba(255, 255, 255, .1);
+    font-size: 1.8em;
+}
+
+#settings-btn:hover, #info-btn:hover {
+    color: rgba(255, 255, 255, .3);
+}
+
+#settings-window, #info-window {
+    height: calc(100% - 5px);
+    width: 400px;
+    display: none;
+    position: absolute;
+    top: 5;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 100;
 }
 
 .gun {

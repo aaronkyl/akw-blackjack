@@ -120,6 +120,12 @@ function Hand(id) {
 }
 
 $(document).ready(function() {
+    $("#settings-btn").click(function() {
+        $("#settings-window").slideToggle("fast");
+    });
+    $("#info-btn").click(function() {
+        $("#info-window").slideToggle("fast");
+    });
     // initialize game
     var deck = new Deck();
     deck.shuffle();
