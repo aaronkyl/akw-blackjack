@@ -51,13 +51,13 @@ button:focus {
 .dithered {
     background-color: white;
     background-color: rgba(255,255,255,0.4);
-    color: white;
+    color: rgba(255,255,255,.7);
 }
 
 .dithered:hover {
     background-color: white;
     background-color: rgba(255,255,255,0.4);
-    color: white;
+    color: rgba(255,255,255,.7);
 }
 
 #table {
@@ -119,7 +119,7 @@ button:focus {
     right: .7em;
     height: 30px;
     width: 30px;
-    color: rgba(255, 255, 255, .1);
+    color: rgba(255, 255, 255, .2);
     font-size: 2em;
 }
 
@@ -129,22 +129,40 @@ button:focus {
     right: 1.5em;
     height: 30px;
     width: 30px;
-    color: rgba(255, 255, 255, .1);
+    color: rgba(255, 255, 255, .2);
     font-size: 1.8em;
 }
 
 #settings-btn:hover, #info-btn:hover {
-    color: rgba(255, 255, 255, .3);
+    color: rgba(255, 255, 255, .4);
 }
 
 #settings-window, #info-window {
     height: calc(100% - 5px);
-    width: 400px;
+    width: calc(100% - 5px);
+    border-radius: 13px;
     display: none;
     position: absolute;
+    left: 0;
     top: 5;
-    background-color: rgba(0, 0, 0, .85);
+    background-color: #1A532D;
     z-index: 100;
+}
+
+h2 {
+    text-align: center;
+}
+
+.fa-times {
+    position: absolute;
+    top: .3em;
+    right: .6em;
+    color: rgba(255, 255, 255, .3);
+    font-size: 2em;
+}
+
+.fa-times:hover {
+    color: rgba(255, 255, 255, .5);
 }
 
 .gun {
@@ -165,17 +183,44 @@ button:focus {
     margin: 2px;
 }
 
-.hand {
-    background-color: rgba(0, 0, 0, 0.15);
+.hand-container {
+    position: relative;
     width: 90%;
     min-width: 300px;
     min-height: 100px;
     margin-bottom: 30px;
-    display: flex;
-    flex-wrap: wrap;
     padding: 5px;
     border-radius: 5px;
 }
+
+.hand-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, .1);
+    font-size: 4.8em;
+    text-align: left;
+    letter-spacing: .05em;
+    padding-left: .3em;
+    padding-right: .3em;
+}
+
+.hand {
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 100%;
+    /*min-width: 300px;*/
+    min-height: 100px;
+    /*margin-bottom: 30px;*/
+    display: flex;
+    flex-wrap: wrap;
+    /*padding: 5px;*/
+    border-radius: 5px;
+}
+
 
 .label {
     width: 90%;
@@ -192,6 +237,7 @@ button:focus {
 .card {
     height: 90px;
     margin: 5px;
+    z-index: 5;
 }
 
 /*code to collapse hand into stacked cards*/

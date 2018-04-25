@@ -123,9 +123,15 @@ $(document).ready(function() {
     $("#settings-btn").click(function() {
         $("#settings-window").slideToggle("fast");
     });
+    $("#settings-close-btn").click(function() {
+        $("#settings-window").slideToggle("fast");
+    })
     $("#info-btn").click(function() {
         $("#info-window").slideToggle("fast");
     });
+    $("#info-close-btn").click(function() {
+        $("#info-window").slideToggle("fast");
+    })
     // initialize game
     var deck = new Deck();
     deck.shuffle();

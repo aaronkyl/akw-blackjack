@@ -13,8 +13,21 @@
         <div id="table">
             <div id="info-btn"><i class="fas fa-info"></i></div>
             <div id="settings-btn"><i class="fas fa-cog"></i></div>
-            <div id="settings-window"></div>
-            <div id="info-window"></div>
+            <div id="settings-window">
+                <i id="settings-close-btn" class="fas fa-times"></i>
+                <h2>Settings</h2>
+                <h4>Number of Decks</h4>
+                <h4>Table Color</h4>
+                <label class="lime">
+                  <input type="radio" name="color" value="lime">
+                  <div class="layer"></div>
+                  <div class="button"><span></span></div>
+                </label>
+            </div>
+            <div id="info-window">
+                <i id="info-close-btn" class="fas fa-times"></i>
+                <h2>How to Play</h2>
+            </div>
             <div class="gun"></div>
             <div id="game-area">
                 <h1>BLACKJACK</h1>
@@ -29,19 +42,25 @@
                     </div>
                 </div>
                 <div id="messages"></div>
+                <div class="hand-container">
+                    <div class="hand-background">
+                        <label>DEALER</label>
+                        <label id="dealer-points" class="points"></label>
+                    </div>
+                    <div id="dealer-hand" class="hand">
+                    </div>
+                </div>
                 <div class="label">
-                    <label>Dealer: </label>
-                    <label id="dealer-points" class="points"></label>
-                    <label id="dealer-wins" class="wins"></label>
+                    <!--<label>Player: </label>-->
+                    
                 </div>
-                <div id="dealer-hand" class="hand">
-                </div>
-                <div class="label">
-                    <label>Player: </label>
-                    <label id="player-points" class="points"></label>
-                    <label id="player-wins" class="wins"></label>
-                </div>
-                <div id="player-hand" class="hand">
+                <div class="hand-container">
+                    <div class="hand-background">
+                        <label>PLAYER</label>
+                        <label id="player-points" class="points"></label>
+                    </div>
+                    <div id="player-hand" class="hand">
+                    </div>
                 </div>
                 <div class="buttons">
                     <button id="deal-button">DEAL</button>
