@@ -72,7 +72,6 @@ function Hand(id) {
     this.drawCard = function(deck, faceup = true) {
         if (deck.isEmpty()) {
             // modal about deck being empty, start new game?
-            console.log("deck empty");
         }
         // get card
         let card = deck.cards.splice(that.cards.length - 1, 1)[0];
@@ -190,6 +189,7 @@ $(document).ready(function() {
         $("#deal-button").dither();
         
         if (deck.cards.length >= 4) {
+            console.log("dealt with deck size: ", deck.cards.length);
             [player, dealer].forEach(function(e) {
                 // clear hand
                 e.cards = [];
@@ -208,10 +208,13 @@ $(document).ready(function() {
     
     $('#hit-button').click(function() {
         if (deck.isEmpty()) {
-            $('#messages').text("Deck is out of cards");
+            console.log("hit button deck empty returned: ", deck.isEmpty());
+            $('#messages').text("Deck is out of cards! Click Stand to see who won!");
             return;
         } else {
+            console.log("hit button said deck not empty with: ", deck.isEmpty());
             player.drawCard(deck);
+            console.log("new deck size: ", deck.cards.length);
             player.calculatePoints();
             checkForWinner();
         }
