@@ -123,26 +123,21 @@ button:focus {
 #settings-btn, #info-btn {
     display: flex;
     align-items: flex-end;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 1em;
+    color: rgba(255, 255, 255, .2);
     z-index: 1;
 }
 
 #settings-btn {
-    position: absolute;
-    top: .5em;
-    right: .7em;
-    height: 30px;
-    width: 30px;
-    color: rgba(255, 255, 255, .2);
+    right: 1em;
     font-size: 2em;
 }
 
 #info-btn {
-    position: absolute;
-    top: .5em;
-    right: 1.5em;
-    height: 30px;
-    width: 30px;
-    color: rgba(255, 255, 255, .2);
+    right: 1.8em;
     font-size: 1.8em;
 }
 
