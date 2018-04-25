@@ -4,11 +4,19 @@ function Card(suit, name, value) {
     this.value = value;
     this.faceup = true;
     
+    this.imageSRC = function() {
+        if (this.faceup) {
+            return `img/${this.name}_of_${this.suit}.png`;
+        } else {
+            return "img/card_back.svg";
+        }
+    };
+    
     this.drawCardImage = function() {
         if (this.faceup) {
-            return `<img class="card" src="img/${this.name}_of_${this.suit}.png" alt="${this.name} of ${this.suit}">`;
+            return `<img class="card" src="${this.imageSRC()}" alt="${this.name} of ${this.suit}">`;
         } else {
-            return '<img class="card" src="img/card_back.svg" alt="Unrevealed card">';
+            return `<img class="card" src="${this.imageSRC()}" alt="Unrevealed card">`;
         }
         
     };
@@ -197,7 +205,7 @@ $(document).ready(function() {
         playersTurn = false;
         // put code to replace first card image with revealed card here
         dealer.cards[0].faceup = true;
-        $('#dealer-hand img:first-child').replaceWith(dealer.cards[0].drawCardImage());
+        $('#dealer-hand img:first-child').attr("src", dealer.cards[0].imageSRC());
         while((dealer.value <= player.value) && dealer.value < 17) {
             dealer.drawCard(deck);
             dealer.calculatePoints();
