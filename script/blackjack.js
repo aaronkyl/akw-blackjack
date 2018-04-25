@@ -37,8 +37,6 @@ function Deck() {
                 that.cards.push(new Card(suit, name, 11));
                 that.cards[that.cards.length-1].aceIsOne = function() {
                     this.value = 1;
-                    console.log("ACE VALUE CHANGED TO 1");
-                    console.log(this.name, this.value);
                     return;
                 };
             } else {
@@ -46,7 +44,6 @@ function Deck() {
             }
         });
     });
-    console.log(this.cards);
     
     this.shuffle = function() {
         for (var i = 0, l = that.cards.length; i < 1000; i++) {
@@ -79,7 +76,6 @@ function Hand(id) {
         }
         // get card
         let card = deck.cards.splice(that.cards.length - 1, 1)[0];
-        console.log(card);
         if (this.id == "dealer" && this.cards.length == 0) {
             card.faceup = false;
         }
@@ -92,10 +88,8 @@ function Hand(id) {
     
     this.checkBust = function() {
         if (that.value > 21) {
-            console.log("BUST");
             let ace11InHand = that.cards.findIndex(c => c.name == "ace" && c.value == 11);
             if (ace11InHand + 1) {
-                console.log("11-POINT ACE IN HAND");
                 that.cards[ace11InHand].aceIsOne();
                 that.calculatePoints();
                 return that.checkBust();
