@@ -22,28 +22,30 @@ function Card(suit, name, value) {
     };
 }
 
-function Deck() {
+function Deck(noOfDecks) {
     this.suits = ["hearts", "spades", "diamonds", "clubs"];
     this.names = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
     this.cards = [];
     var that = this;
     
-    // initialize deck with 52 cards
-    this.suits.forEach(function(suit) {
-        that.names.forEach(function(name, value) {
-            if (!isNaN(name)) {
-                that.cards.push(new Card(suit, name, value+1));
-            } else if (name == "ace") {
-                that.cards.push(new Card(suit, name, 11));
-                that.cards[that.cards.length-1].aceIsOne = function() {
-                    this.value = 1;
-                    return;
-                };
-            } else {
-                that.cards.push(new Card(suit, name, 10));
-            }
+    // initialize deck with 52 cards * noOfDecks
+    for(var i = 0; i < noOfDecks; i++) {
+        that.suits.forEach(function(suit) {
+            that.names.forEach(function(name, value) {
+                if (!isNaN(name)) {
+                    that.cards.push(new Card(suit, name, value+1));
+                } else if (name == "ace") {
+                    that.cards.push(new Card(suit, name, 11));
+                    that.cards[that.cards.length-1].aceIsOne = function() {
+                        this.value = 1;
+                        return;
+                    };
+                } else {
+                    that.cards.push(new Card(suit, name, 10));
+                }
+            });
         });
-    });
+    }
     
     this.shuffle = function() {
         for (var i = 0, l = that.cards.length; i < 1000; i++) {
@@ -120,6 +122,8 @@ function Hand(id) {
 }
 
 $(document).ready(function() {
+    var noOfDecks = 1;
+    
     $("#settings-btn").click(function() {
         $("#settings-window").slideToggle("fast");
     });
@@ -133,6 +137,19 @@ $(document).ready(function() {
         $("#info-window").slideToggle("fast");
     });
     
+    $("#shuffle-btn").click(function() {
+        deck = new Deck(noOfDecks);
+        deck.shuffle();
+        dealer = new Hand("dealer");
+        player = new Hand("player");
+        playersTurn = true;
+        $(".hand").empty();
+        $(".points").css("color", "");
+        $(".points").empty();
+        $("#messages").empty();
+        $(".wins").text(0);
+    });
+    
     $(".button span").click(function() {
         var tableColor = $(this).css("background-color");
         $("#table").css("background-color", tableColor);
@@ -140,12 +157,12 @@ $(document).ready(function() {
     
     $('input[name="decks"] ~ label').click(function() {
         noOfDecks = $(this).text();
-        console.log(noOfDecks);
+        $('input[name="decks"] ~ label').css("color", "rgba(255, 255, 255, .5)")
+        $(this).css("color", "white");
     });
     
     // initialize game
-    var noOfDecks = 1;
-    var deck = new Deck();
+    var deck = new Deck(noOfDecks);
     deck.shuffle();
     var dealer = new Hand("dealer");
     var player = new Hand("player");
@@ -213,7 +230,6 @@ $(document).ready(function() {
         $("#deal-button").dither();
         
         if (deck.cards.length >= 4) {
-            console.log("dealt with deck size: ", deck.cards.length);
             [player, dealer].forEach(function(e) {
                 // clear hand
                 e.cards = [];
@@ -226,19 +242,16 @@ $(document).ready(function() {
             });
             checkForWinner();
         } else {
-            $('#messages').text("Deck does not have enough cards to deal");
+            $('#messages').text("Deck does not have enough cards to deal. Click SHUFFLE!");
         }
     });
     
     $('#hit-button').click(function() {
         if (deck.isEmpty()) {
-            console.log("hit button deck empty returned: ", deck.isEmpty());
             $('#messages').text("Deck is out of cards! Click Stand to see who won!");
             return;
         } else {
-            console.log("hit button said deck not empty with: ", deck.isEmpty());
             player.drawCard(deck);
-            console.log("new deck size: ", deck.cards.length);
             player.calculatePoints();
             checkForWinner();
         }

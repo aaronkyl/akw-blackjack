@@ -60,6 +60,26 @@ button:focus {
     color: rgba(255,255,255,.7);
 }
 
+#shuffle-btn {
+    width: 8em;
+    height: 2em;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, .5);
+    font-size: .5em;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    z-index: 3;
+}
+
+#shuffle-btn:hover {
+    background-color: white;
+    color: #1F783D;
+}
+
 #table {
     position: relative;
     display: flex;
@@ -169,19 +189,27 @@ button:focus {
 h2 {
     text-align: center;
     margin-bottom: .5em;
+    letter-spacing: .1em;
 }
 
 h4 {
     font-weight: 200;
+    margin-bottom: .5em;
 }
 
-h4:first-child {
+h4:first-of-type {
     margin-top: .5em;
+    margin-bottom: 0;
+}
+
+h6 {
+    margin-top: 0.5em;
+    font-weight: 100;
 }
 
 .fa-times {
     position: absolute;
-    top: .3em;
+    top: .4em;
     right: .6em;
     color: rgba(255, 255, 255, .3);
     font-size: 2em;
@@ -353,6 +381,7 @@ input {
 
 input[name="decks"] ~ label {
     transition: ease .3s;
+    color: rgba(255, 255, 255, .5);
 }
 
 input[name="decks"]:hover ~ label {
