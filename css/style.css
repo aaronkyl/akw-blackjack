@@ -387,3 +387,18 @@ input[name="decks"] ~ label {
 input[name="decks"]:hover ~ label {
     font-size: 1.5em;
 }
+
+#madeBy {
+    position: absolute;
+    bottom: 1em;
+    color: #404040;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
