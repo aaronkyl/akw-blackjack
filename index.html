@@ -17,12 +17,55 @@
                 <i id="settings-close-btn" class="fas fa-times"></i>
                 <h2>Settings</h2>
                 <h4>Number of Decks</h4>
+                <div id="no-of-decks">
+                    <label>
+                        <input type="radio" name="decks" value="1">
+                        <label>1</label>
+                    </label>
+                    <label>
+                        <input type="radio" name="decks" value="1">
+                        <label>2</label>
+                    </label>
+                    <label>
+                        <input type="radio" name="decks" value="1">
+                        <label>3</label>
+                    </label>
+                    <label>
+                        <input type="radio" name="decks" value="1">
+                        <label>4</label>
+                    </label>
+                    <label>
+                        <input type="radio" name="decks" value="1">
+                        <label>5</label>
+                    </label>
+                </div>
                 <h4>Table Color</h4>
-                <label class="lime">
-                  <input type="radio" name="color" value="lime">
-                  <div class="layer"></div>
-                  <div class="button"><span></span></div>
-                </label>
+                <div id="color-selector">
+                    <label class="crimson">
+                        <input type="radio" name="color" value="orange">
+                        <div class="button"><span></span></div>
+                    </label>
+                    <label class="golden">
+                        <input type="radio" name="color" value="amber">
+                        <div class="button"><span></span></div>
+                    </label>
+                    <label class="green">
+                        <input type="radio" name="color" value="green">
+                        <div class="button"><span></span></div>
+                    </label>
+                    <label class="teal">
+                        <input type="radio" name="color" value="teal">
+                        <div class="button"><span></span></div>
+                    </label>
+                    <label class="blue">
+                        <input type="radio" name="color" value="blue">
+                        <div class="button"><span></span></div>
+                    </label>
+                    <label class="indigo">
+                        <input type="radio" name="color" value="indigo">
+                        <div class="button"><span></span></div>
+                    </label>
+                </div>
             </div>
             <div id="info-window">
                 <i id="info-close-btn" class="fas fa-times"></i>
@@ -31,16 +74,6 @@
             <div class="gun"></div>
             <div id="game-area">
                 <h1>BLACKJACK</h1>
-                <div id="wins-container">
-                    <div>
-                        <label>Dealer: </label>
-                        <label id="dealer-wins" class="wins"></label>
-                    </div>
-                    <div>
-                        <label>Player: </label>
-                        <label id="player-wins" class="wins"></label>
-                    </div>
-                </div>
                 <div id="messages"></div>
                 <div class="hand-container">
                     <div class="hand-background">
@@ -49,6 +82,13 @@
                     </div>
                     <div id="dealer-hand" class="hand">
                     </div>
+                </div>
+                <div id="wins-container">
+                    <label id="dealer-wins" class="wins"></label>
+                    <i class="fas fa-arrow-up"></i>
+                    <label id="wins-text">WINS</label>
+                    <i class="fas fa-arrow-down"></i>
+                    <label id="player-wins" class="wins"></label>
                 </div>
                 <div class="hand-container">
                     <div class="hand-background">

@@ -131,8 +131,20 @@ $(document).ready(function() {
     });
     $("#info-close-btn").click(function() {
         $("#info-window").slideToggle("fast");
-    })
+    });
+    
+    $(".button span").click(function() {
+        var tableColor = $(this).css("background-color");
+        $("#table").css("background-color", tableColor);
+    });
+    
+    $('input[name="decks"] ~ label').click(function() {
+        noOfDecks = $(this).text();
+        console.log(noOfDecks);
+    });
+    
     // initialize game
+    var noOfDecks = 1;
     var deck = new Deck();
     deck.shuffle();
     var dealer = new Hand("dealer");
