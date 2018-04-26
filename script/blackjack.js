@@ -148,6 +148,9 @@ $(document).ready(function() {
         $(".points").empty();
         $("#messages").empty();
         $(".wins").text(0);
+        $("#hit-button").dither();
+        $("#stand-button").dither();
+        $("#deal-button").undither();
     });
     
     $(".button span").click(function() {
