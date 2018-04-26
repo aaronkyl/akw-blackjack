@@ -86,7 +86,7 @@ button:focus {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: #1A6333;
+    background-color: #155E99;
     border: 30px solid #704B12;
     border-radius: 50px;
     min-height: 500px;
@@ -271,6 +271,7 @@ h6 {
     color: rgba(0,0,0,0.5);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    letter-spacing: .1em;
 }
 
 .hand {
