@@ -1,3 +1,3 @@
 # blackjack
 
-https://trello.com/b/ekJzv85M/blackjack-app
+[Trello Board](https://trello.com/b/ekJzv85M/blackjack-app)
