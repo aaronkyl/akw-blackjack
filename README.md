@@ -2,6 +2,8 @@
 
 ## [AKW Blackjack](http://blackjack.aaronkwilkinson.com)
 
+Blackjack app built with jQuery.
+
 [Trello Board](https://trello.com/b/ekJzv85M/blackjack-app)
 
 ### Things I learned in this project
